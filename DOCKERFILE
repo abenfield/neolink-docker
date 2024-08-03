@@ -1,0 +1,34 @@
+FROM ubuntu:22.04
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+  wget \
+  unzip \
+  libgstrtspserver-1.0-0 \
+  libgstreamer1.0-0 \
+  libgstreamer-plugins-bad1.0-0 \
+  gstreamer1.0-x \
+  gstreamer1.0-plugins-base \
+  gstreamer1.0-plugins-good \
+  gstreamer1.0-plugins-bad \
+  libssl-dev
+
+# Set the version of neolink to download
+ENV NEOLINK_VERSION=latest
+
+# Download and extract neolink
+RUN wget https://github.com/neolink/neolink/releases/download/$NEOLINK_VERSION/neolink-linux-amd64.zip -O /tmp/neolink.zip && \
+    unzip /tmp/neolink.zip -d /usr/local/bin && \
+    rm /tmp/neolink.zip
+
+# Create directory for config file
+RUN mkdir -p /etc/neolink
+
+# Copy config file into the container
+COPY neolink.toml /etc/neolink/neolink.toml
+
+# Set the working directory
+WORKDIR /usr/local/bin
+
+# Run neolink with the specified config file
+CMD ["./neolink", "rtsp", "--config=/etc/neolink/neolink.toml"]

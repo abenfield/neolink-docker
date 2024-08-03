@@ -1,0 +1,14 @@
+bind = "0.0.0.0"
+
+[[cameras]]
+name = "Camera01"
+username = "admin"
+password = "password"
+uid = "ABCDEF0123456789"
+
+[[cameras]]
+name = "Camera02"
+username = "admin"
+password = "password"
+uid = "BCDEF0123456789A"
+address = "192.168.1.10"
