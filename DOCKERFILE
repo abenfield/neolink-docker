@@ -13,11 +13,8 @@ RUN apt-get update && apt-get install -y \
   gstreamer1.0-plugins-bad \
   libssl-dev
 
-# Set the version of neolink to download
-ENV NEOLINK_VERSION=latest
-
 # Download and extract neolink
-RUN wget https://github.com/neolink/neolink/releases/download/$NEOLINK_VERSION/neolink-linux-amd64.zip -O /tmp/neolink.zip && \
+RUN wget https://github.com/QuantumEntangledAndy/neolink/releases/download/v0.6.3.rc.2/neolink_linux_arm64.zip -O /tmp/neolink.zip && \
     unzip /tmp/neolink.zip -d /usr/local/bin && \
     rm /tmp/neolink.zip
 
